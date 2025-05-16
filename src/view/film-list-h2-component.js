@@ -1,20 +1,16 @@
 import { createElement } from '../framework/render.js';
 
-export default class FilmListComponent {
+export default class FilmListH2Component {
   constructor() {
     this.element = this.#createElement();
   }
 
   #createElement() {
     const template = `
-    <div>
+      <div>
         <h2>Список Фильмов</h2>
-    </div>
-
-    <div class="movie-list">
-        
-        <div id="movie-list" class="card-container"></div>
-      </div>`;
+      </div>
+    `;
     return createElement(template);
   }
 }

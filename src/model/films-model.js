@@ -38,4 +38,12 @@ export default class FilmsModel {
   #notify() {
     this.#observers.forEach((observer) => observer());
   }
+  updateFilm(id, updatedData) {
+  const index = this.#films.findIndex(f => f.id === id);
+  if (index !== -1) {
+    this.#films[index] = { ...this.#films[index], ...updatedData };
+    this.#notify();
+  }
+}
+
 }

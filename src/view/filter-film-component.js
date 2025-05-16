@@ -1,8 +1,9 @@
 import { createElement } from '../framework/render.js';
 
 export default class FilterMovieComponent {
-  constructor() {
+  constructor({ onChange }) {
     this.element = this.#createElement();
+    this.#setEventHandlers(onChange);
   }
 
   #createElement() {
@@ -24,5 +25,30 @@ export default class FilterMovieComponent {
       </div>
     `;
     return createElement(template);
+  }
+
+  #setEventHandlers(callback) {
+    if (!callback) return;
+
+    const statusRadios = this.element.querySelectorAll('input[name="status-filter"]');
+    const favoriteCheckbox = this.element.querySelector('#favorite-filter');
+
+    statusRadios.forEach(radio =>
+      radio.addEventListener('change', () => callback(this.getFilters()))
+    );
+
+    favoriteCheckbox.addEventListener('change', () =>
+      callback(this.getFilters())
+    );
+  }
+
+  getFilters() {
+    const status = this.element.querySelector('input[name="status-filter"]:checked').value;
+    const favoriteOnly = this.element.querySelector('#favorite-filter').checked;
+
+    return {
+      status,
+      favoriteOnly
+    };
   }
 }
