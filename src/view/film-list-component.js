@@ -6,7 +6,9 @@ export default class FilmListComponent {
   }
 
   #createElement() {
-    const template = `<ul class="film-list"></ul>`;
+    const template = `<ul class="movie-list">
+    <h2>Список Фильмов</h2>
+    </ul>`;
     return createElement(template);
   }
 }
